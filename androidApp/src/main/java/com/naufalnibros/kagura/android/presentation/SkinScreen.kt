@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.naufalnibros.kagura.android.component.SkinDetailSection
 import com.naufalnibros.kagura.android.component.SkinListSection
 import com.naufalnibros.kagura.domain.models.Skin
-import com.naufalnibros.kagura.domain.state.StateResult
+import com.naufalnibros.kagura.domain.state.StateSkin
 import com.naufalnibros.kagura.viewmodels.SkinViewModel
 import org.koin.androidx.compose.getViewModel
 
@@ -33,12 +33,12 @@ fun SkinScreen(viewModel: SkinViewModel = getViewModel()) {
     ) {
         val modifier = Modifier.padding(it)
         when (val state = skins) {
-            is StateResult.OnError -> {
+            is StateSkin.OnError -> {
                 ErrorScreen(modifier) {
                     viewModel.load()
                 }
             }
-            is StateResult.OnSuccess -> {
+            is StateSkin.OnSuccess -> {
                 ContentScreen(
                     modifier,
                     skins = state.data,
